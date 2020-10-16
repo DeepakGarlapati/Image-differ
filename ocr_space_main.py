@@ -67,7 +67,10 @@ def applyOCR( file ):
     enhanceImage( file )
     api = ocrspace.API('8a214b0d6788957',ocrspace.Language.English)
     ocrOut = api.ocr_file(file)
-    # print( ocrOut )
+    print('\n')
+    print( '------------- OCR ouput -----------' )
+    print( ocrOut )
+    print('\n------------------------------------\n')
     return ocrOut
 
 def processAllFiles( path ):
@@ -103,12 +106,9 @@ def processFile( file ):
         country = area[4]
         print( areaName, region )
 
-        path = 'E:\\Personal projects\\Image differ\\All samples\\Output\\'
-        changeCurrentWorkingDirectory( path )
-
         # Create directory if not exits and move files
         folderName = areaName + ', ' + region
-        destFolder = path + folderName + '\\' 
+        destFolder = os.getcwd() + folderName + '\\' 
         # copyFile( sourceFolder, destFolder, folderName, fileName )
 
     except Exception as exception:
@@ -122,6 +122,10 @@ def main():
     startTime = time.time() #To calculate run time of the program
     # os.system('cls')  #Clear screen
 
+    ## Change current working directory
+    path = 'E:\\Personal projects\\Image differ\\All samples\\Output\\'
+    changeCurrentWorkingDirectory( path )
+
     ## Process all files of sourceFolder
     sourceFolder = 'E:\\Personal projects\\Image differ\\All samples\\' 
     if( processAllFiles( sourceFolder )):
@@ -133,4 +137,5 @@ def main():
 
 if __name__=="__main__":
     print('========== Executing ocr_space_main ==========\n')
-    main()
+    # main()
+    processFile( 'E:\Personal projects\Image differ\All samples\WhatsApp Image 2020-09-29 at 17.54.58 (1).jpeg' )
